@@ -1,7 +1,6 @@
 "use client";
 import { useSession } from "next-auth/react";
 import { createContext, useContext, useEffect, useState } from "react";
-import data from './data'
 const UserContext = createContext();
 
 export const useUserContext = () => {
@@ -15,15 +14,14 @@ export const UserProvider = ({ children }) => {
 
   useEffect(() => {
     console.log("session?.user changed:", session?.user);
-    console.log(data);
     const fetchUserData = async () => {
       setLoading(true);
       try {
-        // const response = await fetch(`/api/me`, { cache: "no-store" }); // Replace with your API endpoint
-        if (data) {
-          // const data = await response.json();
+        const response = await fetch(`/api/me`, { cache: "no-store" }); // Replace with your API endpoint
+        if (response) {
+          const data = await response.json();
 
-          setUser(data); // Assuming user data is in data.data
+          setUser(data.data); // Assuming user data is in data.data
         } else {
           console.error("Error fetching user data:", response.statusText);
           setUser(null); // Set user to null in case of an error

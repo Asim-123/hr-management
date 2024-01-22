@@ -15,11 +15,12 @@ const Home = () => {
   return (
     <section className="w-full">
       <WelcomeAlert />
-      {user.role === "Admin" ? (
-        <AdminDashboard />
+      {user.role === "employee" ? (
+        <EmployeeDashboard />
+
       ) : (
         <>
-        <EmployeeDashboard />
+          <AdminDashboard />
         </>
       )}
     </section>
