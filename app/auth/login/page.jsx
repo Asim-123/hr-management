@@ -29,10 +29,15 @@ const Login = () => {
   }
 
   useEffect(() => {
-    if (status === "authenticated" && status !== "loading") {
+    // if (status === "authenticated" && status !== "loading") {
+    if (status === "authenticated") {
       const nextAuthToken = getCookie("next-auth.session-token");
+      console.log("Next Auth Token");
       if (nextAuthToken) {
-        router.push("/");
+        setTimeout(() => {
+          console.log("Navigating...");
+          router.push("/");
+        }, 5000);
       }
     }
   }, [status, session]);
